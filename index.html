@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gerador de QR Code</title>
+  <title>Gerador de QR Code com Download</title>
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
   <style>
     body {
@@ -14,6 +14,19 @@
     #qrcode {
       margin-top: 20px;
     }
+    #downloadBtn {
+      display: none;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    #downloadBtn:hover {
+      background-color: #45a049;
+    }
   </style>
 </head>
 <body>
@@ -23,14 +36,17 @@
   <button onclick="generateQRCode()" style="padding: 10px 20px; margin-top: 10px;">Gerar QR Code</button>
 
   <div id="qrcode"></div>
+  <a id="downloadBtn" download="qrcode.png">Baixar QR Code</a>
 
   <script>
     function generateQRCode() {
       const text = document.getElementById("inputText").value;
       const qrCodeDiv = document.getElementById("qrcode");
+      const downloadBtn = document.getElementById("downloadBtn");
 
       // Limpa o QR Code anterior
       qrCodeDiv.innerHTML = "";
+      downloadBtn.style.display = "none";
 
       // Gera o QR Code
       if (text.trim()) {
@@ -41,6 +57,11 @@
             return;
           }
           qrCodeDiv.appendChild(canvas);
+
+          // Converte o canvas para uma imagem
+          const dataURL = canvas.toDataURL("image/png");
+          downloadBtn.href = dataURL;
+          downloadBtn.style.display = "inline-block";
         });
       } else {
         alert("Por favor, insira algum texto ou URL.");
