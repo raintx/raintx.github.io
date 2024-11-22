@@ -23,6 +23,7 @@
       border: none;
       cursor: pointer;
       text-decoration: none;
+      border-radius: 5px;
     }
     #downloadBtn:hover {
       background-color: #45a049;
@@ -44,7 +45,7 @@
       const qrCodeDiv = document.getElementById("qrcode");
       const downloadBtn = document.getElementById("downloadBtn");
 
-      // Limpa o QR Code anterior
+      // Limpa o QR Code e oculta o botão anterior
       qrCodeDiv.innerHTML = "";
       downloadBtn.style.display = "none";
 
@@ -56,11 +57,15 @@
             alert("Erro ao gerar o QR Code!");
             return;
           }
+
+          // Exibe o QR Code no canvas
           qrCodeDiv.appendChild(canvas);
 
-          // Converte o canvas para uma imagem
+          // Converte o canvas em uma URL de imagem
           const dataURL = canvas.toDataURL("image/png");
           downloadBtn.href = dataURL;
+
+          // Exibe o botão de download
           downloadBtn.style.display = "inline-block";
         });
       } else {
