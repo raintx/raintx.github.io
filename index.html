@@ -45,7 +45,7 @@
       const qrCodeDiv = document.getElementById("qrcode");
       const downloadBtn = document.getElementById("downloadBtn");
 
-      // Limpa o QR Code e oculta o botão anterior
+      // Limpa o QR Code anterior e esconde o botão
       qrCodeDiv.innerHTML = "";
       downloadBtn.style.display = "none";
 
@@ -58,14 +58,14 @@
             return;
           }
 
-          // Exibe o QR Code no canvas
+          // Exibe o QR Code
           qrCodeDiv.appendChild(canvas);
 
-          // Converte o canvas em uma URL de imagem
+          // Converte o canvas para uma imagem
           const dataURL = canvas.toDataURL("image/png");
-          downloadBtn.href = dataURL;
 
-          // Exibe o botão de download
+          // Atualiza o botão de download
+          downloadBtn.href = dataURL;
           downloadBtn.style.display = "inline-block";
         });
       } else {
