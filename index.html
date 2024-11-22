@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de QR Code</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    #qrcode {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Gerador de QR Code</h1>
+  <p>Digite o texto ou URL para gerar um QR Code:</p>
+  <input type="text" id="inputText" placeholder="Digite algo aqui" style="width: 80%; padding: 10px;">
+  <button onclick="generateQRCode()" style="padding: 10px 20px; margin-top: 10px;">Gerar QR Code</button>
+
+  <div id="qrcode"></div>
+
+  <script>
+    function generateQRCode() {
+      const text = document.getElementById("inputText").value;
+      const qrCodeDiv = document.getElementById("qrcode");
+
+      // Limpa o QR Code anterior
+      qrCodeDiv.innerHTML = "";
+
+      // Gera o QR Code
+      if (text.trim()) {
+        QRCode.toCanvas(text, { width: 200 }, (err, canvas) => {
+          if (err) {
+            console.error(err);
+            alert("Erro ao gerar o QR Code!");
+            return;
+          }
+          qrCodeDiv.appendChild(canvas);
+        });
+      } else {
+        alert("Por favor, insira algum texto ou URL.");
+      }
+    }
+  </script>
+</body>
+</html>
